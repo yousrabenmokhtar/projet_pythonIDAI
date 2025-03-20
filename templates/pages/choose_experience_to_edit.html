@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choisissez l'expérience à modifier</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        max-width: 800px;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        margin: 50px auto; /* Centrer horizontalement */
+    }
+
+    h2 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+        display: block; /* Pour étendre le lien à toute la largeur */
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease; /* Animation de transition */
+    }
+
+    a:hover {
+        background-color: #e6f2ff; /* Changement de couleur au survol */
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Choisissez l'expérience à modifier :</h2>
+    <ul>
+        {% for experience in experiences %}
+            <li><a href="{% url 'edit_experience' experience_id=experience.id %}"> {{ experience.nom_experience }} - {{ experience.Lieu_fonctionnement }} - {{ experience.Duree_experience }} 
+                {{ experience.description }}
+            </a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>

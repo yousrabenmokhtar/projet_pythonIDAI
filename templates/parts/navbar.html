@@ -1,0 +1,73 @@
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div class="navbar-center">
+    <ul>
+        <div class="navbar-left">
+            <a href="{% url 'home' %}" class="logo">
+                <img src="{% static 'images/images/OurLogo.png' %}">
+            </a>
+
+            <li><a href="{% url 'home' %}" class="active-link"><i class="fas fa-home icon"></i> <span class="text">Accueil</span></a></li>
+
+            <li><a href="{% url 'profile_Lists' %}"><i class="fas fa-user-friends"></i> <span class="text">Utilisateurs</span></a></li>
+            <li><a href="{% url 'inbox' %}"><i class="fa fa-comment"></i> <span class="text">Conversations</span></a></li>
+            <li><a href="{% url 'laureat' %}"><i class="fas fa-graduation-cap"></i><span class="text">Laureat</span></a></li>
+            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i><span class="text">Logout</span></a></li>
+            
+
+        </div>
+    </ul>
+</div>
+
+<style>
+    .icon {
+        padding: 0 5px; /* Ajoute un padding de 5 pixels à gauche et à droite de l'icône */
+    }
+    
+    .text {
+        margin-left: 5px; /* Ajoute une marge de 5 pixels à gauche du texte */
+    }
+.navbar-left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(238 238 238); 
+    height: 50px;
+    padding: 6px 6%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 5px 10px rgba(53, 63, 120, 0.335);
+    border-radius: 20px;
+}
+
+.navbar-center ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-center li {
+    display: inline-block;
+    margin-right: 20px; /* Espacement entre les éléments */
+}
+
+.navbar-center li:last-child {
+    margin-right: 0; /* Aucun espacement pour le dernier élément */
+}
+
+.navbar-center a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-center img {
+    width: 20px; /* Ajustez la taille des icônes si nécessaire */
+    margin-right: 5px; /* Espacement entre l'icône et le texte */
+}
+
+
+</style>

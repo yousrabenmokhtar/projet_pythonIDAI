@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouvelle Expérience</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        form {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        h1{
+            text-align:center;
+            color: #333
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f2f2f2; /* Gris clair */
+           
+        }
+    </style>
+</head>
+<body>
+    <h1>Ajouter des  educations  </h1>
+    <form action="{% url 'add_education' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="Diplome" placeholder="le diplome" required>
+        <input type="text" name="nom_etablissement" placeholder="nom de l'etablissement" required>
+        <input type="text" name="Annees_Etudes" placeholder="Annees_Etudes" required>
+        <button type="submit">Ajouter l'éducation </button>
+    </form>
+</body>
+</html>

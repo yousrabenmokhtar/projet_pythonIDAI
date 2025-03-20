@@ -1,0 +1,194 @@
+
+{% extends 'baseClassroom.html' %}
+{% load static %}
+{% csrf_token %}
+{% block title %}   
+{% endblock %}
+
+{% block content %}
+<style>
+    .publier , .annuler {
+    display: inline-block;
+    background-color: #7b38d8;
+    border-radius: 10px;
+    border: 4px double #cccccc;
+    color: #eeeeee;
+    text-align: center;
+    font-size: 20px;
+    padding: 7px;
+    width: 150px;
+    cursor: pointer;
+    margin: 5px;
+    transition: all 0.5s;
+}
+
+.publier:hover  , .annuler:hover {
+    background-color: #a76eff; /* Couleur différente au survol */
+    width: 170px; /* Largeur différente au survol */
+}
+
+
+    .top_annonce input[type="text"] {
+    width: 500px ;
+    height: 60px ;
+    margin-right: 250px ;
+
+    border-radius: 5px 5px ;
+    border: none ;
+    /* color: red ; */
+}
+
+.publication_annonc {
+    
+    margin-left: 180px ;
+    text-align: center;
+  /* background-color: #f5f5f5; */
+  padding: 20px;
+  /* border: 1px solid #ddd; */
+  border-radius: 5px;
+  margin-bottom: 200px;
+  width: 750px ;
+}
+
+.single-publication {
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+}
+.row-publ {
+    
+    display: flex;
+    margin-left: 100px  ;
+    /* padding: auto; */
+}
+
+.single-publication h5,
+.single-publication p {
+  margin-bottom: 5px;
+  margin-right:  100px ;
+}
+
+
+</style>
+
+    <div class="container">
+        <div class="sideBar">
+            <div class="row">
+                <a href="{% url 'homeClassroom'%}">
+                    <image src="{% static 'images/home.png' %}" alt="home">
+                    <p>Accueil </p>
+                </a>
+            </div>
+
+            <div class="row">
+                <a href="#">
+                    <image src="{% static 'images/Agenda.jpeg' %}" alt="Agenda">
+                    <p>Agenda </p>
+                </a>
+            </div>
+            <hr style="margin-top: 15px ; margin-bottom: 15px ; height: 2px  ;">
+            <!-- 
+                ####################################################
+                ici il doit ajouter les module que l'etudiant est inscrit 
+                ###################################################
+             -->
+            <div class="row" id="inscrit">
+                <a href="#">
+                    <span> </span>
+                    <image src="{% static 'images/inscrit.png' %}" alt="inscrit">
+                    <p>Inscrit   </p>
+                </a>
+            </div>
+            <hr style="margin-top: 15px ; margin-bottom: 15px ; height: 2px  ;">
+
+            <div class="row" >
+                <a href="#">
+                    <image src="{% static 'images/archive.png' %}" alt="Archive">
+                    <p>Cours archive   </p>
+                </a>
+            </div>
+            
+            <div class="row" >
+                <a href="#">
+                    <image src="{% static 'images/parametres.png' %}" alt="Parametre">
+                    <p>Parametres   </p>
+                </a>
+            </div>
+          
+
+        </div>
+        <div class="content">
+            <div class="head_content">
+                <div class="left">
+                    <ul>
+                        <li>Flux </li>
+                        <li>Travaux et devoirs  </li>
+                        <li> Personnes </li>
+                    </ul>
+                </div>
+                <div class="right">
+                    <image src="{% static 'images/Agenda.jpeg' %}" alt="agenda">
+                    <image src="{% static 'images/compte.jpeg' %}" alt="drive">
+                </div>
+            </div>
+            <hr>
+
+            <div class="annonce" id="annonce">
+                <div class="content_annonce">
+                    <div class="top_annonce"> 
+                        <image src="{% static 'images/compte.jpeg' %}" alt="icon compt">
+                        <form action=" ''" method="post">
+                            {% csrf_token %}
+                            <input type="text" class="input_annonce" placeholder="Annoncez quelque chose à votre classe" name="contenu" id="contenu">
+                    </div>
+                    <div class="botton_annonce" id="botton_annonce">
+                        <div class="annocne_left">
+                            <image src="{% static 'images/youtube.png' %}" alt="youtub">
+                            <image src="{% static 'images/upload.png' %}" alt="upload_document">
+                            <image src="{% static 'images/google-drive.png' %}" alt="google-drive">
+                        </div>    
+                        <div class="annonce_right">
+                            <input type="submit" value="Annuler" class="annuler">
+                            <input type="submit" value="Publier" class="publier" >
+                        </div>
+                    </form>
+                
+                    
+                    
+                    </div>
+                </div>
+                
+                <div class="publication_annonc">
+                    {% for publication in publications %}
+                    <div class="single-publication">
+                        <div class="row-publ">
+
+                            <h5>Contenu  :  </h5> <p> {{ publication.contenu }}</p>
+                        </div>
+                        <div class="row-publ">
+                        <h5>Date    : </h5> {{ publication.date_publication }}</p>
+                      </div>
+                      <div class="row-publ">
+                        <h5>Auteur  :  </h5> {{ publication.auteur }}</p>
+                    </div>
+                    <div class="row-publ">    
+                    <h5>Classe   : </h5>{{ publication.classe }}</p>
+                    </div>
+                        <!-- Display other publication details as needed -->
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+  
+        
+    </div>
+
+
+{% endblock %}

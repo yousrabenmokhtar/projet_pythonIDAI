@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<style>
+    body {
+        background-color: #f4f7f6;
+        margin-top: 20px;
+        overflow-y: hidden;
+    }
+
+    .card {
+        background: #fff;
+        transition: .5s;
+        border: 0;
+        margin-bottom: 30px;
+        border-radius: .55rem;
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+    }
+    .new{
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 16px;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+    .new:hover {
+    background-color: #0056b3;
+    }
+
+    .people-list {
+        width: 280px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 20px;
+        z-index: 7;
+        height:100vh;
+        overflow-y: scroll;
+    }
+
+    .people-list .chat-list li {
+        padding: 10px 10px;
+        list-style: none;
+        border-radius: 10px;
+        overflow-y: auto;
+    }
+
+    .people-list .chat-list li:hover {
+        background: #efefef;
+        cursor: pointer;
+    }
+
+    .people-list .chat-list li.active {
+        background: #efefef;
+    }
+
+    .people-list .chat-list li .name {
+        font-size: 15px;
+    }
+
+    .people-list .chat-list img {
+        width: 45px;
+        border-radius: 50%;
+    }
+
+    .people-list img {
+        float: left;
+        border-radius: 50%
+    }
+
+    .people-list .about {
+        float: left;
+        padding-left: 8px
+    }
+
+    .people-list .status {
+        color: #999;
+        font-size: 13px
+    }
+
+    .chat-description {
+        padding: 20px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Hauteur égale à la hauteur de la vue */
+        flex-direction: column;
+        margin-left : 165px;
+
+        
+    }
+
+    .icon-container {
+        position: relative;
+        margin-bottom: 20px; /* Espacement entre l'icône et le texte */
+    }
+    
+    .icon-container i {
+        position: absolute;
+        color: #0095F6;
+        top: -80px; /* Ajustez la valeur selon votre préférence */
+        font-size: 100px; /* Taille de l'icône */
+        padding:10px;
+    }
+    
+    .chat-description p {
+        font-size: 20px; /* Taille du texte du message */
+        color: #333; /* Couleur du texte du message */
+        padding: 15px;
+        margin-left: 45px;
+    }
+
+    .message-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #007bff;
+        color: #fff;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        font-size: 24px;
+        transition: background-color 0.3s ease;
+    }
+    .name{
+        text-decoration:none;
+        color:black;
+        font-weight:bold;
+        font-size:20px;
+    }
+
+    .message-icon:hover {
+        background-color: #0056b3;
+    }
+
+    .enjoy{
+        {% comment %} position: absolute; {% endcomment %}
+        margin-left: 100px;
+        top: -20px;
+
+    }
+
+    .input-group2 input.form-control {
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        font-size: 16px;
+        width:100%;
+        padding: 10px 10px;
+    }
+</style>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-lg-12">
+            <div class="card chat-app">
+                <div id="plist" class="people-list">
+                    <div class="input-group2">
+                        <a href="{% url 'searchUser' %}" class="new">saerch</a>
+                    </div>
+                    {% for message in messages %}
+                    <ul class="list-unstyled chat-list mt-2 mb-0">
+                        <li class="clearfix">
+                            <a href="{% url 'directs' message.user.username %}" class="list-group-item list-group-item-action border-0 {% if active_direct == message.user.username %}active{% endif %}">
+                            {% if message.user.utilisateur.photo_profile  %}
+                            <img src="{{ message.user.utilisateur.photo_profile.url }}" class="rounded-circle mr-1" alt="img" width="40" height="40">
+                            {% endif %}
+                                <div class="about">
+                                    <div class="name">{{message.user.username}}</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    {% endfor %}
+                    {% comment %} static {% endcomment %}
+                  
+                </div>
+                <div class="chat-description">
+                    <div class="icon-container">
+                        <i class="fa fa-comment"></i>
+                    </div>
+                    <p>Make calls, share your screen, and get a faster experience with your friends!</p>
+                    <small class="enjoy">Feel free and enjoy <span>&#10084;&#65039;</span> </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

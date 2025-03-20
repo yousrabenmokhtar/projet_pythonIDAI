@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistiques Universitaires</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+
+    body {
+        margin-top: 100px;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: rgb(238 238 238); 
+    }
+
+    /* .university-image {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .university-image img {
+      max-width: 50%;
+      height: auto;
+    } */
+
+    .university-title {
+      text-align: center;
+      margin-top: 30px;
+      color: #484de3;
+    }
+
+    .university-title h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 50px;
+    }
+
+    .stat-item {
+      text-align: center;
+      width: 28%;
+      background-color: #4c849c;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0px 0px 10px rgba(65, 97, 173, 0.1);
+      transition: transform 0.3s ease; /* Transition sur la transformation */
+      
+    }
+
+    .stat-item:hover {
+      transform: scale(1.05);
+    }
+
+    .stat-icon {
+      font-size: 2rem;
+      color: #000000;
+    }
+
+    .stat-count {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .stat-title {
+      font-size: 1.2rem;
+      color: #ffffff;
+    }
+
+    .unit {
+      font-size: 1rem;
+      color: #484de3;
+    }
+
+    /* Media Query pour les appareils mobiles */
+    @media screen and (max-width: 500px) {
+      .stats-container {
+        flex-direction: column;
+      }
+
+      .stat-item {
+        width: 20%;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- <div class="university-image">
+  <img src="university_image.jpg" alt="Université de l'Excellence">
+</div> -->
+
+<div class="university-title">
+  <h1>Université de l'Excellence</h1>
+</div>
+
+<div class="stats-container">
+  <div class="stat-item">
+    <div class="stat-icon">
+      <i class="fas fa-graduation-cap"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-count">
+        <span class="counter" data-target="500">0</span>
+        <span class="unit">Licenciés</span>
+      </div>
+      <div class="stat-title">Total Licenciés</div>
+    </div>
+  </div>
+
+  <div class="stat-item">
+    <div class="stat-icon">
+      <i class="fas fa-user-graduate"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-count">
+        <span class="counter" data-target="300">0</span>
+        <span class="unit">Masters</span>
+      </div>
+      <div class="stat-title">Total Masters</div>
+    </div>
+  </div>
+
+  <div class="stat-item">
+    <div class="stat-icon">
+      <i class="fas fa-user-tie"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-count">
+        <span class="counter" data-target="100">0</span>
+        <span class="unit">Doctorants</span>
+      </div>
+      <div class="stat-title">Total Doctorants</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const counters = document.querySelectorAll(".counter");
+  counters.forEach((counter) => {
+    const target = parseInt(counter.getAttribute("data-target"));
+    const increment = Math.ceil(target / 100);
+
+    let start = 0;
+    const timer = setInterval(() => {
+      if (start >= target) {
+        clearInterval(timer);
+        counter.textContent = target;
+        return;
+      }
+      start += increment;
+      counter.textContent = start;
+    }, 10);
+  });
+</script>
+
+</body>
+</html>
+{% endblock content %}

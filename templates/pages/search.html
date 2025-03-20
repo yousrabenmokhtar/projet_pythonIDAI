@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<br><br>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://kit.fontawesome.com/fc1e235b2e.js"></script>
+  <link rel="stylesheet" href="{% static 'assets2/style.css' %}">
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <title>Instagram Login Form</title>
+</head>
+
+<body>
+
+  <div id="wrapper">
+    <div class="container">
+      <div class="phone-app-ddemo"></div>
+      <div class="form-data">
+        
+        <form action="" method="GET" class="mb-4">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="logo text-center mb-4">
+          <h3 style="padding-top: 5px; font-size: 20px;">Results for "{{ query }}":</h3>
+        </div>
+
+        {% for user in users %}
+            <div class="side-menu__user-profile mb-4">
+                <div class="d-flex align-items-center">
+                    <div class="side-menu__user-avatar mr-3">
+                        {% if user.photo_profile %}
+                        <img src="{{user.photo_profile.url }}" alt="User Picture" class="rounded-circle" width="50" height="50">
+                        {% else %}
+                        <img src="{% static 'assets1/default.jpg' %}" alt="User Picture" class="rounded-circle" width="50" height="50">
+                        {% endif %}
+                    </div>
+                    <div class="side-menu__user-idnfo">
+                        {% if user.Nom_complet %}
+                        <a href="{% url 'profileWithId' id=user.id %}" class="text-dark font-weight-bold">{{user.Nom_complet|title }}</a>
+                        {% else %}
+                        <a href="{% url 'profileWithId' id=user.id %}" class="text-dark">Instagram User</a>
+                        {% endif %}
+                        <br>
+                        <a href="{% url 'profileWithId' id=user.id %}" class="text-primary">View Profile</a>
+                        <br>
+                        <a href="{% url 'directs' username=user.Nom_complet%}" class="text-primary">Message</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+{% endblock content %}

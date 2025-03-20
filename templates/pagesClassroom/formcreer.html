@@ -1,0 +1,93 @@
+<!-- <form method="post" action="{% url 'creer_classe_virtuel' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Créer</button>
+</form> -->
+
+<style>
+    body{
+        
+        overflow-y: scroll;
+        background-color: white;
+        color: #000000;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    /* Style pour le formulaire */
+    .custom-form {
+        width: 700px;
+        height: 400px ;
+        margin: 0 auto;
+        padding: 20px ;
+        display: flex ;
+        justify-content: center;
+        align-items: center;
+      
+  
+        background-color: #f7f7f7;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Style pour les champs */
+    .form-field {
+        margin-bottom: 20px;
+    }
+
+    /* Style pour les labels */
+    .form-label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    /* Style pour les inputs */
+    .form-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+       
+    }
+
+    /* Style pour le bouton */
+    .form-button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 200px ;
+    }
+
+    /* Style pour le bouton au survol */
+    .form-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+<div class="form-group">
+<h3 style="text-align: center;">Créer une classe virtuelle</h3>
+<form method="post" action="{% url 'creer_classe_virtuel' %}" class="custom-form">
+    {% csrf_token %}
+    <div class="form-group">
+
+        <div class="form-field">
+            <label for="id_nom_classe" class="form-label">Nom de la classe:</label>
+            <!-- {{ form.nom_classe }} -->
+            <input type="text" name="{{ form.nom_classe.name }}" placeholder="Nom de la classe">
+
+        </div>
+        <div class="form-field">
+            <label for="id_code_acces" class="form-label">Code d'accès:</label>
+            <!-- {{ form.code_acces }} -->
+            <input type="text" name="{{ form.code_acces.name }}" placeholder="Code d'accès"/>
+
+        </div>
+        <button type="submit" class="form-button">Créer</button>
+    </form>
+</div>

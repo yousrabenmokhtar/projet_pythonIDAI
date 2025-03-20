@@ -1,0 +1,538 @@
+{% extends '../baseClassroom.html' %}
+
+{% load static %}
+
+{% block title %}Classroom {{user_type}}{% endblock %}
+{% block content %}
+{% load static %}
+<style>
+      *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+            
+        }
+        body {
+            overflow-y: scroll;
+            background-color: white;
+           color: #000000;
+        }
+
+    .module{
+        /* background-color: rgb(230, 224, 224); */
+        margin-top: 50px ;
+        /* margin-bottom: 20px ; */
+        display: inline-block;
+        width: 300px ;
+        margin: 20px ;
+    }
+    .module .top {
+        background-color:   rgb(111 131 149); 
+    }
+    .module * {
+        
+        color: #3d3434 ;
+    }
+    *{
+        margin: 0 ;
+        padding: 0 ;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px ;
+      
+      
+      }
+      
+      .conatiner_head { 
+        display: flex  ;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px ;
+        margin-bottom: 10px ;
+      
+      } 
+      
+      a{
+        text-decoration: none ;
+      
+      }
+      
+      img{
+        width: 30px;
+        height: 30px ;
+      }
+      .head_left , .head_right {
+        
+        display: flex ;
+        justify-content: space-between;
+        align-items: center ;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      .head_left a , .head_right a  {
+        padding: 10px ;
+      }
+      
+      .content {
+      
+        margin: 20px 40px  ;
+      }
+      
+      
+        
+      
+      .module:hover {
+        box-shadow: 5px 5px 10px rgb(196, 163, 163); 
+        transform: scale(1.01) ;
+      
+      }
+      .module {
+        /* display: inline-block; */
+        /* background-color: red ; */
+        /* width: 350px ; */
+        /* height: 230px ; */
+        border: 1px solid gray;
+        border-radius: 5px 5px ;
+        cursor: pointer;
+        transition : all  0.9s  ; 
+      }
+      .module .top {
+        background-color: rgb(199, 150, 150);
+        padding : 10px ;
+      }
+      .module .top img {
+        width: 90px ;
+        height: 80px ;
+        float: right;
+        margin-top: -30px ;
+        border-radius: 50% 50% ;
+        margin-right: 10px;
+      }
+      .module .centre {
+        height: 100px ;
+      }
+      .module .botton {
+        display: flex;
+        justify-content:end;
+      }
+      
+      
+      .container {
+        display: flex ;
+      }
+      .sideBar {
+      
+        overflow: scroll ;
+        width: 25%  ;
+        height: 80vh;
+        margin-right: 20px ;
+        padding: 10px  ;
+      }
+      
+      .row a  {
+        display: flex;
+        align-items: center;
+        margin: 5px;
+        text-decoration: none ;
+        color: black;
+        padding: 10px ;
+        
+      }
+      
+      .row a:hover {
+        border-radius: 20px 20px ;
+        background-color: rgb(236, 224, 224) ;
+      }
+      
+      .row a p {
+        margin-left: 30px ;
+      }
+      
+      
+      #creer_cours {
+        display: none;
+        z-index: 1 ;
+        position: absolute;
+        top: 50px ;
+        right: 130px;
+        border: 1px solid rgb(206, 195, 195) ;
+        border-radius: 10px 10px ;
+        background-color: rgba(245, 227, 227, 0.5);
+        padding: 10px ;
+        width: 150px ;
+      
+      
+      }
+      #creer_cours  p {
+        font-size: 16px ;
+      }
+      .social{
+        display: none;
+        z-index: 1 ;
+        position: absolute;
+        top: 50px ;
+        right: 130px;
+        border: 1px solid rgb(206, 195, 195) ;
+        border-radius: 10px 10px ;
+        background-color: rgba(245, 227, 227, 0.5);
+        padding: 10px ;
+        width: 250px ;
+      
+      
+      }
+      .social .row {
+        display: flex;
+      }
+      
+      .social .row a {
+        /* display: flex; */
+        display: inline;
+        align-items: center;
+        justify-content: center;
+      
+      }
+      
+      .social .row a p {
+        text-align: center;
+        margin-left: -20px ;
+        margin-top: 10px ;
+      }
+      
+      /* 
+      ###################################
+            file module.html 
+      ####################################
+      */
+      
+      .content{
+        width: 75% ;
+        /* margin-left: -100px ; */
+      }
+      .head_content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 10px ;
+      }
+      /* .head_content hr { */
+        /* width: 10000px ; */
+        /* margin-left: -1000px ; */
+        /* margin-right: -100px ; */
+      
+      /* } */
+      
+      .head_content .left ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .head_content .left ul li {
+        display: inline-block;
+        margin-right: 20px;
+      }
+      
+      .head_content .right img {
+        width: 40px; 
+        height: 40px ; 
+        margin-left: 10px;
+      }
+      
+      
+      .content_annonce{
+      
+        width: 700px ;
+        height: 200px ;
+        border: 1px solid black;
+        border-radius: 10px 10px ;
+        justify-content: center;
+        align-items: center;
+        margin: 20px    auto ;
+        padding: 20px 30px ;
+        position: relative;
+      }
+      .top_annonce {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom : 10px ;
+      
+      }
+      .top_annonce input[type="text"] {
+        width: 100% ;
+        height: 30px ;
+        margin-left: 10px ;
+        border-radius: 5px 5px ;
+        border: none ;
+        /* border: red ; */
+      }
+      .botton_annonce {
+        /* width: 50px ; */
+        position: absolute;
+        bottom: 0;
+        left: 0; 
+        width: 90%; 
+        display: flex;
+        justify-content: space-between;
+        align-items: center; 
+        margin : 10px ; ;
+        /* display: none ; */
+      }
+      
+      .annocne_left img {
+        margin: 10px ; 
+      }
+      
+      
+      
+</style>
+
+    <!-- 
+        #############################################################################
+        ----------------------- header class room -----------------------------------
+        #############################################################################3
+
+
+     -->
+
+    <head>
+        <div class="conatiner_head">
+            <div class="head_left">
+                <a href="#">
+                    <image src="{% static 'images/SideBar.jpeg' %}" alt="SideBar">
+                </a>
+                <a href="#">
+                    <image src="{% static 'images/classroom.png' %}" alt="classroom">
+                </a>
+                <a href="#">
+              
+                <h3>Classroom</h3>
+                 </a>
+            </div>
+            <div class="head_right">
+                <a href="#" id="ajout">
+                    <image src="{% static 'images/add.png' %}" alt="ajoute">
+                </a>
+
+                {% if user_type == "Professeur" %}
+                <div id="creer_cours" ">
+                    <a href="{% url 'creer_classe_virtuel' %}"> 
+                        <p>Créer un cours</p>
+                    </a>
+                    <a href="{% url 'rejoindre_cours' %}">
+                        <p>Rejoindre un cours</p>
+                    </a>
+                </div>
+                
+            {% elif user_type == "Etudiant" %}
+                <div id="creer_cours" ">
+                       <a href="{% url 'rejoindre_cours' %}">
+                            <p>Rejoindre un cours</p>
+                        </a>
+                </div>
+      
+            {% endif %}
+
+                <a href="#" id="button_social"><image src="{% static 'images/application.png' %}" alt="mult"> 
+                    <div class="social" id="social" >
+                        <div class="row">
+
+                            <a href="#"><image src="{% static 'images/classroom.png' %}" alt="">
+                                <p>Compte </p>
+                            </a>
+                            <a href="#"><image src="{% static 'images/classroom.png' %}" alt="">
+                                <p>Gmail </p>
+                            </a>
+                            <a href="#"><image src="{% static 'images/classroom.png' %}" alt="">
+                                <p>drive </p>
+                            </a>
+                        </div>
+                        <div class="row">
+                            
+                            <a href="#"><image src="{% static 'images/classroom.png' %}" alt="">
+                                <p>Classroom </p>
+                            </a>
+                            
+                            <a href="#"><image src="{% static 'images/classroom.png' %}" alt="">
+                                <p>Classroom </p>
+                            </a>
+
+                            <a href="#"><image src="{% static 'images/classroom.png' %}" alt="">
+                                <p>Classroom </p>
+                            </a>
+                        </div>
+                    </div>
+                </a>
+                <a href="#"><image src="{% static 'images/compte.jpeg' %}" alt="counte"> </a>
+            </div>
+        </div>
+    </head>
+    <hr>
+    <!-- 
+        #############################################################################
+        ----------------------- content class room -----------------------------------
+        #############################################################################3
+     -->
+
+     <div class="container">
+            <div class="sideBar">
+                <div class="row">
+                    <a href="{% url 'homeClassroom'%}">
+                        <image src="{% static 'images/home.png' %}" alt="home">
+                        <p>Accueil </p>
+                    </a>
+                </div>
+
+                <div class="row">
+                    <a href="#">
+                        <image src="{% static 'images/Agenda.jpeg' %}" alt="Agenda">
+                        <p>Agenda </p>
+                    </a>
+                </div>
+                <hr style="margin-top: 15px ; margin-bottom: 15px ; height: 2px  ;">
+                <!-- 
+                    ####################################################
+                    ici il doit ajouter les module que l'etudiant est inscrit 
+                    ###################################################
+                 -->
+                <div class="row" id="inscrit">
+                    <a href="#">
+                        <span> </span>
+                        <image src="{% static 'images/inscrit.png' %}" alt="inscrit">
+                        <p>Inscrit   </p>
+                    </a>
+                </div>
+                <hr style="margin-top: 15px ; margin-bottom: 15px ; height: 2px  ;">
+
+                <div class="row" >
+                    <a href="#">
+                        <image src="{% static 'images/archive.png' %}" alt="Archive">
+                        <p>Cours archive   </p>
+                    </a>
+                </div>
+                
+                <div class="row" >
+                    <a href="#">
+                        <image src="{% static 'images/parametres.png' %}" alt="Parametre">
+                        <p>Parametres   </p>
+                    </a>
+                </div>
+              
+
+            </div>
+
+            <div class="content "> 
+                <!-- // contentd de module  -->
+         
+
+                        {% for classe_virtuelle in classes_virtuelles %}
+                        <div class="module"> 
+                            <div class="top">
+                                <a href="{% url 'module_classe'  %}">
+                                    <h4>{{ classe_virtuelle.nom_classe }}</h4>
+                                    <h6>Licence IDAI </h6>
+                                    <p>{{ classe_virtuelle.professeur.Nom_complet  }}</p> 
+                                       <!utilisateur.photo_profile.url--  -->
+                                    <!-- <image src="{% static 'images/sanae.jpeg' %}" alt=" {{ classe_virtuelle.professeur.Nom_complet }}"> -->
+                                        <image src="{{  utilisateur.photo_profile.url }}" alt=" {{ utilisateur.Nom_complet }}">
+                                </a>
+                            </div>
+                            <div class="centre">
+                                <!-- Ajoutez d'autres éléments du centre si nécessaire -->
+                            </div>
+                            <hr>
+                            <div class="botton">
+                                <a href="#" title="ouvrire votre devoir sur le {{ classe_virtuelle.nom_classe }}">
+                                    <image src="{% static 'images/devoirs.png' %}" alt="">
+                                </a>
+                                <a href="#" title="ouvrire le dossier de {{ classe_virtuelle.nom_classe }}">
+                                    <image src="{% static 'images/folder.png' %}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        {% if code_form == classe_virtuelle.code_access  %}
+                                
+                        {% for classe_virtuelle in classes_virtuelles %}
+                        <div class="module"> 
+                            <div class="top">
+                                <a href="{% url 'module_classe'  %}">
+                                    <h4>{{ classe_virtuelle.nom_classe }}</h4>
+                                    <h6>Licence IDAI </h6>
+                                    <p>{{ classe_virtuelle.professeur.Nom_complet  }}</p> 
+                                       <!utilisateur.photo_profile.url--  -->
+                                    <!-- <image src="{% static 'images/sanae.jpeg' %}" alt=" {{ classe_virtuelle.professeur.Nom_complet }}"> -->
+                                        <image src="{{  utilisateur.photo_profile.url }}" alt=" {{ utilisateur.Nom_complet }}">
+                                </a>
+                            </div>
+                            <div class="centre">
+                                <!-- Ajoutez d'autres éléments du centre si nécessaire -->
+                            </div>
+                            <hr>
+                            <div class="botton">
+                                <a href="#" title="ouvrire votre devoir sur le {{ classe_virtuelle.nom_classe }}">
+                                    <image src="{% static 'images/devoirs.png' %}" alt="">
+                                </a>
+                                <a href="#" title="ouvrire le dossier de {{ classe_virtuelle.nom_classe }}">
+                                    <image src="{% static 'images/folder.png' %}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+            </div>
+            
+
+        
+        <script>
+
+
+
+
+
+
+
+
+
+let ajout = document.getElementById("ajout");
+let creer_cours = document.getElementById("creer_cours");
+let social = document.getElementById("social");
+let button_social = document.getElementById("button_social");
+// let body = document.querySelectorAll()
+
+
+ajout.addEventListener("click", () => {
+    const creerCoursStyle = window.getComputedStyle(creer_cours);
+    if (creerCoursStyle.display === "none") {
+        creer_cours.style.display = "inline-block";
+        social.style.display = "none";
+        
+
+    } else {
+        creer_cours.style.display = "none";
+        social.style.display = "none";
+
+    }
+});
+
+
+button_social.addEventListener("click", () => {
+    const socialStyle = window.getComputedStyle(social);
+    if (socialStyle.display === "none") {
+        social.style.display = "inline-block";
+        creer_cours.style.display = "none";
+    } else {
+        social.style.display = "none";
+        creer_cours.style.display = "none";
+
+    }
+})
+
+</script>
+
+{% endblock %}
+
+

@@ -1,0 +1,6 @@
+
+<form action="{% url 'access_cours' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="code_acces">
+    <input type="submit" value="Rejoindre">
+</form>
